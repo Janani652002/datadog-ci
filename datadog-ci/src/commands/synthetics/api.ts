@@ -104,7 +104,7 @@ const triggerTests = (request: (args: AxiosRequestConfig) => AxiosPromise<Server
     request,
     {retryOn429: true}
   )
-
+console.log('resp', resp.data)
   return resp.data
 }
 
