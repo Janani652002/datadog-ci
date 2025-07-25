@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",                        // 👈 Required for "paths" to work
+    "paths": {
+      "@datadog/datadog-ci": ["../datadog-ci"]
+    }
+  },
+  "include": ["src", "test"]
+}
