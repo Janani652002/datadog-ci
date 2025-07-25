@@ -92,7 +92,6 @@ const resolveTilde = (filePath: string | undefined) => {
 }
 
 export const getCISpanTags = (): SpanTags | undefined => {
-    console.log('Synthetics CI Tags!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
   const env = process.env
   let tags: SpanTags = {}
 

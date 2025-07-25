@@ -307,6 +307,83 @@ TagResource -> arn:aws:lambda:sa-east-1:123456789012:function:lambda-hello-world
 "
 `;
 
+exports[`lambda instrument execute instrument multiple specified functions interactively 2`] = `
+"
+🐶 Instrumenting Lambda function
+[!] No AWS credentials found, let's set them up! Or you can re-run the command and supply the AWS credentials in the same way when you invoke the AWS CLI.
+
+[!] Configure AWS region.
+
+[Warning] The environment, service and version tags have not been configured. Learn more about Datadog unified service tagging: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/#serverless-environment.
+
+[Warning] Instrument your Lambda functions in a dev or staging environment first. Should the instrumentation result be unsatisfactory, run \`uninstrument\` with the same arguments to revert the changes.
+
+[!] Functions to be updated:
+	- arn:aws:lambda:sa-east-1:123456789012:function:lambda-hello-world
+	[Warning] At least one latest layer version is being used. Ensure to lock in versions for production applications using \`--layerVersion\` and \`--extensionVersion\`.
+	- arn:aws:lambda:sa-east-1:123456789012:function:lambda-hello-world-2
+	[Warning] At least one latest layer version is being used. Ensure to lock in versions for production applications using \`--layerVersion\` and \`--extensionVersion\`.
+
+Will apply the following updates:
+UpdateFunctionConfiguration -> arn:aws:lambda:sa-east-1:123456789012:function:lambda-hello-world
+{
+  "FunctionName": "arn:aws:lambda:sa-east-1:123456789012:function:lambda-hello-world",
+  "Handler": "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler",
+  "Environment": {
+    "Variables": {
+      "DD_LAMBDA_HANDLER": "index.handler",
+      "DD_API_KEY": "02**********33bd",
+      "DD_SITE": "datadoghq.com",
+      "DD_SERVERLESS_APPSEC_ENABLED": "false",
+      "DD_CAPTURE_LAMBDA_PAYLOAD": "false",
+      "DD_SERVERLESS_LOGS_ENABLED": "true",
+      "DD_MERGE_XRAY_TRACES": "false",
+      "DD_TRACE_ENABLED": "true",
+      "DD_FLUSH_TO_LOG": "true"
+    }
+  },
+  "Layers": [
+    "arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Extension:1",
+    "arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Node16-x:1"
+  ]
+}
+TagResource -> arn:aws:lambda:sa-east-1:123456789012:function:lambda-hello-world
+{
+  "dd_sls_ci": "vXXXX"
+}
+UpdateFunctionConfiguration -> arn:aws:lambda:sa-east-1:123456789012:function:lambda-hello-world-2
+{
+  "FunctionName": "arn:aws:lambda:sa-east-1:123456789012:function:lambda-hello-world-2",
+  "Handler": "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler",
+  "Environment": {
+    "Variables": {
+      "DD_LAMBDA_HANDLER": "index.handler",
+      "DD_API_KEY": "02**********33bd",
+      "DD_SITE": "datadoghq.com",
+      "DD_SERVERLESS_APPSEC_ENABLED": "false",
+      "DD_CAPTURE_LAMBDA_PAYLOAD": "false",
+      "DD_SERVERLESS_LOGS_ENABLED": "true",
+      "DD_MERGE_XRAY_TRACES": "false",
+      "DD_TRACE_ENABLED": "true",
+      "DD_FLUSH_TO_LOG": "true"
+    }
+  },
+  "Layers": [
+    "arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Extension:1",
+    "arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Node18-x:1"
+  ]
+}
+TagResource -> arn:aws:lambda:sa-east-1:123456789012:function:lambda-hello-world-2
+{
+  "dd_sls_ci": "vXXXX"
+}
+[!] Confirmation needed.
+[!] Instrumenting functions.
+✔ Updated 2 Lambda functions.
+
+"
+`;
+
 exports[`lambda instrument execute instruments Ruby application properly 1`] = `
 "
 [Dry Run] 🐶 Instrumenting Lambda function

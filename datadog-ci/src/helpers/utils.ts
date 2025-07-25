@@ -21,7 +21,7 @@ export const makeTerminalLink = <URL extends string>(url: URL) => {
 }
 
 export const pick = <T extends Record<any, any>, K extends keyof T>(base: T, keys: K[]) => {
-    console.log('Synthetics CI Running!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    // console.log('Synthetics CI Running!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
   const definedKeys = keys.filter((key) => !!base[key])
   const pickedObject: Partial<T> = {}
 

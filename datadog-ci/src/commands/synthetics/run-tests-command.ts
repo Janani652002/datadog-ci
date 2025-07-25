@@ -28,7 +28,6 @@ const $5 = makeTerminalLink(
 const $6 = makeTerminalLink(`${datadogDocsBaseUrl}/synthetics/mobile_app_testing/`)
 
 export class RunTestsCommand extends BaseCommand {
-    console.log('Synthetics CI works Localyy!!!!!!!!!!!!!!!!!!!!')
   public static paths = [
     ['synthetics', 'run-tests'],
     ['synthetics', 'build-and-test'],
@@ -188,7 +187,7 @@ export class RunTestsCommand extends BaseCommand {
   }
 
   protected resolveConfigFromEnv(): RecursivePartial<RunTestsCommandConfig> {
-    console.log('Synthetics resolveConfigFromEnv!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    // console.log('Synthetics resolveConfigFromEnv!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     // Override with OVERRIDE ENV variables
     const envOverrideBasicAuth = deepExtend(
       this.config.defaultTestOverrides?.basicAuth ?? {},
@@ -361,7 +360,6 @@ export class RunTestsCommand extends BaseCommand {
   }
 
   protected getReporters(): Reporter[] {
-    console.log('synthetics CI getReporters!!!!!!!!!!!!!!!!!!!!)
     if (this.config.jUnitReport) {
       return [
         new JUnitReporter({
