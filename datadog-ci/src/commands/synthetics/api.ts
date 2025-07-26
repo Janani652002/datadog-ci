@@ -216,7 +216,7 @@ const pollResults = (request: (args: AxiosRequestConfig) => AxiosPromise<RawPoll
     request,
     {retryOn404: true, retryOn429: true}
   )
-
+console.log('apipoll', resp.data)
   const includedTestsByID = new Map<string, RawPollResultTest>()
   resp.data.included?.forEach((r) => {
     if (r.type === 'test') {

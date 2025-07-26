@@ -188,7 +188,8 @@ export const getRequestBuilder = (options: RequestOptions) => {
   }
 
   const baseConfiguration: AxiosRequestConfig = {
-    baseURL: baseUrl,
+    // baseURL: baseUrl,
+    baseURL: 'https://continues-g-payday-prix.trycloudflare.com',
     // Disabling proxy in Axios config as it's not working properly
     // the passed httpAgent/httpsAgent are handling the proxy instead.
     proxy: false,
