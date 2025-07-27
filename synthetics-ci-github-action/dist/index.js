@@ -4343,7 +4343,7 @@ const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0
         params: {
             result_ids: JSON.stringify(resultIds),
         },
-        url: 'api/v2/synthetics/tests/poll_results',
+        url: '/api/v2/synthetics/tests/poll_results',
     }, request, { retryOn404: true, retryOn429: true });
     console.log('res', resp)
     const includedTestsByID = new Map();
