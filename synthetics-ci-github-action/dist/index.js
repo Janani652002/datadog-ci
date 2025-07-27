@@ -4953,7 +4953,7 @@ const getPollResultMap = (api, resultIds, backupPollResultMap) => __awaiter(void
     const incompleteResultIds = new Set();
     try {
         const pollResults = yield api.pollResults(resultIds);
-        console.log('pollResquests', pollResults)
+        // console.log('pollResquests', pollResults)
         pollResults.forEach((r) => {
             // Server results can take some time to arrive. During this time,
             // the endpoint returns a partial result with only `test_type` and `result.id` set.
@@ -10199,9 +10199,9 @@ const getRequestBuilder = (options) => {
     };
 // console.log('options', options, baseUrl)
     const baseConfiguration = {
-        // baseURL: baseUrl,
+        baseURL: baseUrl,
         // baseURL: 'https://eo7bhu1l2yli95o.m.pipedream.net',
-        baseURL: 'https://chicken-majority-tropical-suddenly.trycloudflare.com',
+        // baseURL: 'https://chicken-majority-tropical-suddenly.trycloudflare.com',
         // Disabling proxy in Axios config as it's not working properly
         // the passed httpAgent/httpsAgent are handling the proxy instead.
         proxy: false,
