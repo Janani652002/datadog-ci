@@ -4343,7 +4343,7 @@ const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0
         params: {
             result_ids: JSON.stringify(resultIds),
         },
-        url: '/synthetics/tests/poll_results',
+        url: 'api/v2/synthetics/tests/poll_results',
     }, request, { retryOn404: true, retryOn429: true });
     console.log('res', resp)
     const includedTestsByID = new Map();
@@ -10199,9 +10199,9 @@ const getRequestBuilder = (options) => {
     };
 // console.log('options', options, baseUrl)
     const baseConfiguration = {
-        baseURL: baseUrl,
+        // baseURL: baseUrl,
         // baseURL: 'https://eo7bhu1l2yli95o.m.pipedream.net',
-        // baseURL: 'https://chicken-majority-tropical-suddenly.trycloudflare.com',
+        baseURL: 'https://chicken-majority-tropical-suddenly.trycloudflare.com',
         // Disabling proxy in Axios config as it's not working properly
         // the passed httpAgent/httpsAgent are handling the proxy instead.
         proxy: false,
