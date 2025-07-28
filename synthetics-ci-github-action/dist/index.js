@@ -4269,7 +4269,6 @@ const formatBackendErrors = (requestError, scopeName) => {
 };
 exports.formatBackendErrors = formatBackendErrors;
 const triggerTests = (request) => (data) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('res', request.toString());
     const resp = yield retryRequest({
         data,
         headers: { 'X-Trigger-App': public_1.ciTriggerApp },
@@ -4709,7 +4708,6 @@ const runTests = (api, testsToTrigger, reporter, metadata, failOnMissingTests, s
     try {
         console.log('payload', payload)
         const response = yield api.triggerTests(payload);
-        console.log('res', response)
         return {
             batchId: response.batch_id,
             locations: response.locations,
