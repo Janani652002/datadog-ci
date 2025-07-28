@@ -4336,7 +4336,8 @@ const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0
         params: {
             result_ids: JSON.stringify(resultIds),
         },
-        url: '/sample/synthetics/tests/poll_results',
+        url: '/synthetics/tests/poll_results',
+        // url: '/sample/synthetics/tests/poll_results',
     }, request, { retryOn404: true, retryOn429: true });
     const includedTestsByID = new Map();
     (_a = resp.data.included) === null || _a === void 0 ? void 0 : _a.forEach((r) => {
@@ -8204,8 +8205,8 @@ const getDatadogHost = (hostConfig) => {
     else if (useIntake && (config.datadogSite === 'datadoghq.com' || config.datadogSite === 'datad0g.com')) {
         host = `https://intake.synthetics.${config.datadogSite}`;
     }
-    // return `${host}/${apiPath}`;
-    return `${host}`;
+    return `${host}/${apiPath}`;
+    // return `${host}`;
 };
 exports.getDatadogHost = getDatadogHost;
 const pluralize = (word, count) => (count === 1 ? word : `${word}s`);
