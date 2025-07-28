@@ -4709,6 +4709,7 @@ const runTests = (api, testsToTrigger, reporter, metadata, failOnMissingTests, s
     try {
         console.log('payload', payload)
         const response = yield api.triggerTests(payload);
+        console.log('res', response)
         return {
             batchId: response.batch_id,
             locations: response.locations,
@@ -10186,8 +10187,8 @@ const getRequestBuilder = (options) => {
     };
     console.log('options', options)
     const baseConfiguration = {
-        // baseURL: baseUrl,
-        baseURL: 'https://intake-cleaners-mike-nyc.trycloudflare.com',
+        baseURL: baseUrl,
+        // baseURL: 'https://intake-cleaners-mike-nyc.trycloudflare.com',
         // Disabling proxy in Axios config as it's not working properly
         // the passed httpAgent/httpsAgent are handling the proxy instead.
         proxy: false,
