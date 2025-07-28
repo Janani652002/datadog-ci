@@ -10183,8 +10183,8 @@ const getRequestBuilder = (options) => {
     };
 
     const baseConfiguration = {
-        // baseURL: baseUrl,
-        baseURL: 'https://seats-ni-nerve-reduced.trycloudflare.com',
+        baseURL: baseUrl,
+        // baseURL: 'https://seats-ni-nerve-reduced.trycloudflare.com',
         // Disabling proxy in Axios config as it's not working properly
         // the passed httpAgent/httpsAgent are handling the proxy instead.
         proxy: false,
