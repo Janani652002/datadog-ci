@@ -4508,7 +4508,7 @@ const getApiHelper = (config) => {
     if (!config.apiKey) {
         throw new errors_1.CriticalError('MISSING_API_KEY', 'API key is required');
     }
-    console.log('config', config)
+    console.log('config', config, (0, public_1.getDatadogHost)({ useIntake: true, apiVersion: 'v1', config }))
     return (0, exports.apiConstructor)({
         apiKey: config.apiKey,
         appKey: config.appKey,
@@ -8175,6 +8175,7 @@ const toExitCode = (reason) => {
 exports.toExitCode = toExitCode;
 const getDatadogHost = (hostConfig) => {
     const { useIntake, apiVersion, config } = hostConfig;
+    console.log('hostConfig', hostConfig)
     const apiPath = (() => {
         switch (apiVersion) {
             case 'v1':
@@ -8195,6 +8196,7 @@ const getDatadogHost = (hostConfig) => {
     else if (useIntake && (config.datadogSite === 'datadoghq.com' || config.datadogSite === 'datad0g.com')) {
         host = `https://intake.synthetics.${config.datadogSite}`;
     }
+    console.log('host', host)
     return `${host}/${apiPath}`;
 };
 exports.getDatadogHost = getDatadogHost;
