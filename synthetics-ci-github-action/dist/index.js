@@ -10183,8 +10183,7 @@ const getRequestBuilder = (options) => {
     };
 
     const baseConfiguration = {
-        // baseURL: baseUrl,
-        baseURL: 'http://localhost:8080',
+        baseURL: baseUrl,
         // Disabling proxy in Axios config as it's not working properly
         // the passed httpAgent/httpsAgent are handling the proxy instead.
         proxy: false,
