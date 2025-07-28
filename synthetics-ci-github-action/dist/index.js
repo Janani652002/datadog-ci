@@ -4269,6 +4269,7 @@ const formatBackendErrors = (requestError, scopeName) => {
 };
 exports.formatBackendErrors = formatBackendErrors;
 const triggerTests = (request) => (data) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('res', request.toString());
     const resp = yield retryRequest({
         data,
         headers: { 'X-Trigger-App': public_1.ciTriggerApp },
