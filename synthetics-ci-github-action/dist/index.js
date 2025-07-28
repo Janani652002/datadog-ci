@@ -10190,6 +10190,7 @@ const getRequestBuilder = (options) => {
         // the passed httpAgent/httpsAgent are handling the proxy instead.
         proxy: false,
     };
+    console.log('baseConfiguration', baseConfiguration)
     return (args) => (0, axios_1.create)(baseConfiguration)(overrideArgs(args));
 };
 exports.getRequestBuilder = getRequestBuilder;
