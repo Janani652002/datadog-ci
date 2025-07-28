@@ -4322,6 +4322,7 @@ const getSyntheticsOrgSettings = (request) => () => __awaiter(void 0, void 0, vo
     const resp = yield retryRequest({
         url: '/synthetics/settings',
     }, request);
+    console.log('respons', resp.data)
     return resp.data;
 });
 const getBatch = (request) => (batchId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -10199,9 +10200,9 @@ const getRequestBuilder = (options) => {
     };
 // console.log('options', options, baseUrl)
     const baseConfiguration = {
-        // baseURL: baseUrl,
+        baseURL: baseUrl,
         // baseURL: 'https://eo7bhu1l2yli95o.m.pipedream.net',
-        baseURL: 'https://chicken-majority-tropical-suddenly.trycloudflare.com',
+        // baseURL: 'https://chicken-majority-tropical-suddenly.trycloudflare.com',
         // Disabling proxy in Axios config as it's not working properly
         // the passed httpAgent/httpsAgent are handling the proxy instead.
         proxy: false,
