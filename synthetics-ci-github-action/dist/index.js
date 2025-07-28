@@ -8183,9 +8183,9 @@ const getDatadogHost = (hostConfig) => {
     const apiPath = (() => {
         switch (apiVersion) {
             case 'v1':
-                return 'v1';
+                return 'api/v1';
             case 'v2':
-                return 'v2';
+                return 'api/v2';
             case 'unstable':
                 return 'api/unstable';
             default:
@@ -8201,7 +8201,7 @@ const getDatadogHost = (hostConfig) => {
         host = `https://intake.synthetics.${config.datadogSite}`;
     }
     console.log('host', host)
-    return `${host}/${apiPath}`;
+    // return `${host}/${apiPath}`;
     return `${host}`;
 };
 exports.getDatadogHost = getDatadogHost;
