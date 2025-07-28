@@ -4329,6 +4329,7 @@ const getBatch = (request) => (batchId) => __awaiter(void 0, void 0, void 0, fun
 });
 const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
+    console.log('request', request.toString())
     const resp = yield retryRequest({
         params: {
             result_ids: JSON.stringify(resultIds),
