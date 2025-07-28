@@ -8180,9 +8180,9 @@ const getDatadogHost = (hostConfig) => {
     const apiPath = (() => {
         switch (apiVersion) {
             case 'v1':
-                return 'api/v1';
+                return 'v2';
             case 'v2':
-                return 'api/v2';
+                return 'v2';
             case 'unstable':
                 return 'api/unstable';
             default:
@@ -8197,8 +8197,8 @@ const getDatadogHost = (hostConfig) => {
     else if (useIntake && (config.datadogSite === 'datadoghq.com' || config.datadogSite === 'datad0g.com')) {
         host = `https://intake.synthetics.${config.datadogSite}`;
     }
-    // return `${host}/${apiPath}`;
-    return `${host}`;
+    return `${host}/${apiPath}`;
+    // return `${host}`;
 };
 exports.getDatadogHost = getDatadogHost;
 const pluralize = (word, count) => (count === 1 ? word : `${word}s`);
