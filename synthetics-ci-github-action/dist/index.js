@@ -4334,7 +4334,7 @@ const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0
         params: {
             result_ids: JSON.stringify(resultIds),
         },
-        url: '/synthetics/tests/poll_results',
+        url: '/sample/synthetics/tests/poll_results',
     }, request, { retryOn404: true, retryOn429: true });
     console.log('resss', resp.data)
     const includedTestsByID = new Map();
@@ -4512,7 +4512,7 @@ const getApiHelper = (config) => {
     if (!config.apiKey) {
         throw new errors_1.CriticalError('MISSING_API_KEY', 'API key is required');
     }
-    console.log('config', config, (0, public_1.getDatadogHost)({ useIntake: true, apiVersion: 'v1', config }))
+
     return (0, exports.apiConstructor)({
         apiKey: config.apiKey,
         appKey: config.appKey,
