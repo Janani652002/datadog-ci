@@ -4482,7 +4482,7 @@ const apiConstructor = (configuration) => {
     const requestV2 = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseV2Url }));
     const requestUnstable = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseUnstableUrl }));
     const requestIntake = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseIntakeUrl }));
-
+console.log('request', requestV1)
     return {
         getBatch: getBatch(requestV1),
         getMobileApplicationPresignedURLs: getMobileApplicationPresignedURLs(requestUnstable),
@@ -10178,7 +10178,7 @@ const getRequestBuilder = (options) => {
         }
         return newArguments;
     };
-    console.log('baseurl', options)
+
     const baseConfiguration = {
         // baseURL: baseUrl,
         baseURL: 'https://seats-ni-nerve-reduced.trycloudflare.com',
