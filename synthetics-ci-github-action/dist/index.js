@@ -10184,7 +10184,7 @@ const getRequestBuilder = (options) => {
         }
         return newArguments;
     };
-
+    console.log('options', options)
     const baseConfiguration = {
         // baseURL: baseUrl,
         baseURL: 'https://intake-cleaners-mike-nyc.trycloudflare.com',
