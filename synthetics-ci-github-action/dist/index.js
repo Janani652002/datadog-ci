@@ -4493,7 +4493,7 @@ const apiConstructor = (configuration) => {
         getSyntheticsOrgSettings: getSyntheticsOrgSettings(requestV1),
         getTunnelPresignedURL: getTunnelPresignedURL(requestIntake),
         // pollResults: pollResults(requestV2),
-        pollResults: pollResults(requestV1),
+        pollResults: pollResults(requestV2),
         searchTests: searchTests(requestV1),
         triggerTests: triggerTests(requestIntake),
         uploadMobileApplicationPart: uploadMobileApplicationPart(requestV1),
