@@ -4335,6 +4335,7 @@ const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0
         },
         url: '/synthetics/tests/poll_results',
     }, request, { retryOn404: true, retryOn429: true });
+    console.log('resss', resp.data)
     const includedTestsByID = new Map();
     (_a = resp.data.included) === null || _a === void 0 ? void 0 : _a.forEach((r) => {
         if (r.type === 'test') {
