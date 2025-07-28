@@ -4329,14 +4329,12 @@ const getBatch = (request) => (batchId) => __awaiter(void 0, void 0, void 0, fun
 });
 const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    console.log('request', request.toString())
     const resp = yield retryRequest({
         params: {
             result_ids: JSON.stringify(resultIds),
         },
         url: '/sample/synthetics/tests/poll_results',
     }, request, { retryOn404: true, retryOn429: true });
-    console.log('resss', resp.data)
     const includedTestsByID = new Map();
     (_a = resp.data.included) === null || _a === void 0 ? void 0 : _a.forEach((r) => {
         if (r.type === 'test') {
@@ -4344,7 +4342,6 @@ const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0
             includedTestsByID.set(r.id, test);
         }
     });
-
     const rawPollResults = resp.data.data;
     const parsedPollResults = [];
     for (const r of rawPollResults) {
@@ -4479,13 +4476,12 @@ exports.is5xxError = is5xxError;
 const retryRequest = (args, request, statusCodesToRetryOn) => (0, public_1.retry)(() => request(args), (retries, e) => (0, exports.determineRetryDelay)(retries, e, statusCodesToRetryOn));
 const apiConstructor = (configuration) => {
     const { baseV1Url, baseV2Url, baseIntakeUrl, baseUnstableUrl, apiKey, appKey, proxyOpts } = configuration;
-    console.log('configurare', configuration)
     const baseOptions = { apiKey, appKey, proxyOpts };
     const requestV1 = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseV1Url }));
     const requestV2 = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseV2Url }));
     const requestUnstable = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseUnstableUrl }));
     const requestIntake = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseIntakeUrl }));
-// console.log('request', configuration, baseOptions, requestV1.toString())
+
     return {
         getBatch: getBatch(requestV1),
         getMobileApplicationPresignedURLs: getMobileApplicationPresignedURLs(requestUnstable),
@@ -4494,7 +4490,6 @@ const apiConstructor = (configuration) => {
         editTest: editTest(requestV1),
         getSyntheticsOrgSettings: getSyntheticsOrgSettings(requestV1),
         getTunnelPresignedURL: getTunnelPresignedURL(requestIntake),
-        // pollResults: pollResults(requestV2),
         pollResults: pollResults(requestV2),
         searchTests: searchTests(requestV1),
         triggerTests: triggerTests(requestIntake),
@@ -4709,7 +4704,7 @@ const runTests = (api, testsToTrigger, reporter, metadata, failOnMissingTests, s
         },
     };
     try {
-        console.log('payload', payload)
+
         const response = yield api.triggerTests(payload);
         return {
             batchId: response.batch_id,
@@ -8180,7 +8175,7 @@ const toExitCode = (reason) => {
 exports.toExitCode = toExitCode;
 const getDatadogHost = (hostConfig) => {
     const { useIntake, apiVersion, config } = hostConfig;
-    console.log('hostConfig', hostConfig)
+
     const apiPath = (() => {
         switch (apiVersion) {
             case 'v1':
@@ -8201,7 +8196,6 @@ const getDatadogHost = (hostConfig) => {
     else if (useIntake && (config.datadogSite === 'datadoghq.com' || config.datadogSite === 'datad0g.com')) {
         host = `https://intake.synthetics.${config.datadogSite}`;
     }
-    console.log('host', host)
     // return `${host}/${apiPath}`;
     return `${host}`;
 };
@@ -10187,15 +10181,13 @@ const getRequestBuilder = (options) => {
         }
         return newArguments;
     };
-    console.log('options', options)
+
     const baseConfiguration = {
         baseURL: baseUrl,
-        // baseURL: 'https://intake-cleaners-mike-nyc.trycloudflare.com',
         // Disabling proxy in Axios config as it's not working properly
         // the passed httpAgent/httpsAgent are handling the proxy instead.
         proxy: false,
     };
-    // console.log('baseConfiguration', baseConfiguration)
     return (args) => (0, axios_1.create)(baseConfiguration)(overrideArgs(args));
 };
 exports.getRequestBuilder = getRequestBuilder;
