@@ -8179,18 +8179,18 @@ exports.toExitCode = toExitCode;
 const getDatadogHost = (hostConfig) => {
     const { useIntake, apiVersion, config } = hostConfig;
     console.log('hostConfig', hostConfig)
-    // const apiPath = (() => {
-    //     switch (apiVersion) {
-    //         case 'v1':
-    //             return 'api/v1';
-    //         case 'v2':
-    //             return 'api/v2';
-    //         case 'unstable':
-    //             return 'api/unstable';
-    //         default:
-    //             return 'api/unstable';
-    //     }
-    // })();
+    const apiPath = (() => {
+        switch (apiVersion) {
+            case 'v1':
+                return 'v1';
+            case 'v2':
+                return 'v2';
+            case 'unstable':
+                return 'api/unstable';
+            default:
+                return 'api/unstable';
+        }
+    })();
     let host = `https://${config.datadogSite}`;
     const hostOverride = process_1.default.env.DD_API_HOST_OVERRIDE;
     if (hostOverride) {
