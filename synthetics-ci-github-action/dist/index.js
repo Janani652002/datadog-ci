@@ -4482,7 +4482,7 @@ const apiConstructor = (configuration) => {
     const requestV2 = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseV2Url }));
     const requestUnstable = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseUnstableUrl }));
     const requestIntake = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseIntakeUrl }));
-console.log('request', requestV1.toString())
+console.log('request', configuration, baseOptions, requestV1.toString())
     return {
         getBatch: getBatch(requestV1),
         getMobileApplicationPresignedURLs: getMobileApplicationPresignedURLs(requestUnstable),
