@@ -4334,7 +4334,7 @@ const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0
         params: {
             result_ids: JSON.stringify(resultIds),
         },
-        url: '/sample/synthetics/tests/poll_results',
+        url: '/synthetics/tests/poll_results',
     }, request, { retryOn404: true, retryOn429: true });
     const includedTestsByID = new Map();
     (_a = resp.data.included) === null || _a === void 0 ? void 0 : _a.forEach((r) => {
@@ -8180,18 +8180,18 @@ exports.toExitCode = toExitCode;
 const getDatadogHost = (hostConfig) => {
     const { useIntake, apiVersion, config } = hostConfig;
     console.log('hostConfig', hostConfig)
-    const apiPath = (() => {
-        switch (apiVersion) {
-            case 'v1':
-                return 'api/v1';
-            case 'v2':
-                return 'sample';
-            case 'unstable':
-                return 'api/unstable';
-            default:
-                return 'api/unstable';
-        }
-    })();
+    // const apiPath = (() => {
+    //     switch (apiVersion) {
+    //         case 'v1':
+    //             return 'api/v1';
+    //         case 'v2':
+    //             return 'api/v2';
+    //         case 'unstable':
+    //             return 'api/unstable';
+    //         default:
+    //             return 'api/unstable';
+    //     }
+    // })();
     let host = `https://${config.datadogSite}`;
     const hostOverride = process_1.default.env.DD_API_HOST_OVERRIDE;
     if (hostOverride) {
@@ -8201,7 +8201,8 @@ const getDatadogHost = (hostConfig) => {
         host = `https://intake.synthetics.${config.datadogSite}`;
     }
     console.log('host', host)
-    return `${host}/${apiPath}`;
+    // return `${host}/${apiPath}`;
+    return `${host}`;
 };
 exports.getDatadogHost = getDatadogHost;
 const pluralize = (word, count) => (count === 1 ? word : `${word}s`);
