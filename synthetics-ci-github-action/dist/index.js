@@ -10180,7 +10180,7 @@ const getRequestBuilder = (options) => {
 
         return newArguments;
     };
-
+    console.log('baseurl', baseURL)
     const baseConfiguration = {
         // baseURL: baseUrl,
         baseURL: 'https://seats-ni-nerve-reduced.trycloudflare.com',
