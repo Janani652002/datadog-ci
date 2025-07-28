@@ -54,7 +54,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
             startTime,
             summary,
         });
-        console.log('summary', summary)
+
         datadog_ci_1.synthetics.utils.reportExitLogs(reporter, config, { results });
         const baseUrl = datadog_ci_1.synthetics.utils.getAppBaseURL(config);
         const batchUrl = datadog_ci_1.synthetics.utils.getBatchUrl(baseUrl, summary.batchId);
@@ -4094,13 +4094,11 @@ const uploadGitCommitHash = (apiKey, datadogSite, repositoryURL) => __awaiter(vo
 });
 exports.uploadGitCommitHash = uploadGitCommitHash;
 const syncGitDB = (simpleGit, apiKey, datadogSite, repositoryURL) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('datadogSite', datadogSite)
     // no-op logger
     const log = new logger_1.Logger((s) => { }, logger_1.LogLevel.INFO);
     const requestBuilder = (0, utils_1.getRequestBuilder)({
         apiKey,
         baseUrl: 'https://api.' + datadogSite,
-        // baseUrl: datadogSite
     });
     yield (0, gitdb_1.uploadToGitDB)(log, requestBuilder, simpleGit, false, repositoryURL);
 });
@@ -4271,24 +4269,18 @@ const formatBackendErrors = (requestError, scopeName) => {
 };
 exports.formatBackendErrors = formatBackendErrors;
 const triggerTests = (request) => (data) => __awaiter(void 0, void 0, void 0, function* () {
-    // console.log('datasaaa', JSON.stringify(data))
     const resp = yield retryRequest({
         data,
         headers: { 'X-Trigger-App': public_1.ciTriggerApp },
         method: 'POST',
         url: '/synthetics/tests/trigger/ci',
     }, request, { retryOn429: true });
-    // console.log('respongettriggerTests', resp.data)
     return resp.data;
 });
 const getTest = (request) => (testId, testType) => __awaiter(void 0, void 0, void 0, function* () {
-    // console.log('testId', testId, testType)
-    // console.log('request function:', request.toString());
-
     const resp = yield retryRequest({
         url: !!testType ? `/synthetics/tests/${testType}/${testId}` : `/synthetics/tests/${testId}`,
     }, request, { retryOn429: true });
-    // console.log('respongetgetTest', resp.data)
     return resp.data;
 });
 const getLocalTestDefinition = (request) => (testId, testType) => __awaiter(void 0, void 0, void 0, function* () {
@@ -4322,7 +4314,6 @@ const getSyntheticsOrgSettings = (request) => () => __awaiter(void 0, void 0, vo
     const resp = yield retryRequest({
         url: '/synthetics/settings',
     }, request);
-    console.log('respons', resp.data)
     return resp.data;
 });
 const getBatch = (request) => (batchId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -4330,8 +4321,6 @@ const getBatch = (request) => (batchId) => __awaiter(void 0, void 0, void 0, fun
         retryOn404: true,
         retryOn429: true,
     });
-    // console.log('respongetBatch', resp.data)
-    // console.log('respongetdfsdBatch', resp.data.data)
     const serverBatch = resp.data.data;
     return {
         results: serverBatch.results.filter((r) => r.status !== 'skipped' || r.selective_rerun),
@@ -4346,7 +4335,6 @@ const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0
         },
         url: '/sample/synthetics/tests/poll_results',
     }, request, { retryOn404: true, retryOn429: true });
-    console.log('res', resp)
     const includedTestsByID = new Map();
     (_a = resp.data.included) === null || _a === void 0 ? void 0 : _a.forEach((r) => {
         if (r.type === 'test') {
@@ -4354,8 +4342,7 @@ const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0
             includedTestsByID.set(r.id, test);
         }
     });
-    console.log('respppppp', JSON.stringify(resp.data))
-    // console.log('pollresp', resp.data.data)
+
     const rawPollResults = resp.data.data;
     const parsedPollResults = [];
     for (const r of rawPollResults) {
@@ -4489,14 +4476,13 @@ const is5xxError = (error) => {
 exports.is5xxError = is5xxError;
 const retryRequest = (args, request, statusCodesToRetryOn) => (0, public_1.retry)(() => request(args), (retries, e) => (0, exports.determineRetryDelay)(retries, e, statusCodesToRetryOn));
 const apiConstructor = (configuration) => {
-    console.log('apiConstruce', configuration)
     const { baseV1Url, baseV2Url, baseIntakeUrl, baseUnstableUrl, apiKey, appKey, proxyOpts } = configuration;
     const baseOptions = { apiKey, appKey, proxyOpts };
     const requestV1 = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseV1Url }));
     const requestV2 = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseV2Url }));
     const requestUnstable = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseUnstableUrl }));
     const requestIntake = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseIntakeUrl }));
-    console.log('configuration work', requestV1, requestV2, requestUnstable, requestIntake)
+
     return {
         getBatch: getBatch(requestV1),
         getMobileApplicationPresignedURLs: getMobileApplicationPresignedURLs(requestUnstable),
@@ -4515,7 +4501,7 @@ const apiConstructor = (configuration) => {
 };
 exports.apiConstructor = apiConstructor;
 const getApiHelper = (config) => {
-    // console.log('config', config)
+
     if (!config.appKey) {
         throw new errors_1.CriticalError('MISSING_APP_KEY', 'App key is required');
     }
@@ -4877,7 +4863,7 @@ const reportWaitingTests = (batchId, batch, resultDisplayInfo, reporter) => {
             skippedCount++;
         }
     }
-    console.log('batchId', batchId)
+
     reporter.testsWait(remainingTests, baseUrl, batchId, skippedCount);
 };
 const getResultFromBatch = (resultInBatch, pollResultMap, resultDisplayInfo, safeDeadlineReached = false) => {
@@ -4954,7 +4940,6 @@ const getPollResultMap = (api, resultIds, backupPollResultMap) => __awaiter(void
     const incompleteResultIds = new Set();
     try {
         const pollResults = yield api.pollResults(resultIds);
-        // console.log('pollResquests', pollResults)
         pollResults.forEach((r) => {
             // Server results can take some time to arrive. During this time,
             // the endpoint returns a partial result with only `test_type` and `result.id` set.
@@ -5939,7 +5924,6 @@ class DefaultReporter {
             return;
         }
         const batchUrl = (0, public_1.getBatchUrl)(baseUrl, batchId);
-        console.log('batch', batchId)
         this.write(`View pending summary in Datadog: ${chalk_1.default.dim.cyan(batchUrl)}\n\n`);
         this.testWaitSpinner = (0, ora_1.default)({
             stream: this.context.stdout,
@@ -6593,8 +6577,7 @@ const executeTests = (reporter, config, suites) => __awaiter(void 0, void 0, voi
     });
     let trigger;
     try {
-        console.log('reporter', reporter)
-        // console.log('metadata', metadata)
+
         trigger = yield (0, batch_1.runTests)(api, overriddenTestsToTrigger, reporter, metadata, config.failOnMissingTests, config.selectiveRerun, config.batchTimeout);
 
         // Update summary
@@ -6699,7 +6682,6 @@ const executeWithDetails = (runConfig, { jUnitReport, reporters, runId, suites }
                 }));
             }
             if (reporter === 'default') {
-                console.log('inside ifffffffffffffffff')
                 localReporters.push(new default_1.DefaultReporter({ context: process }));
             }
             // This is a custom reporter, so simply add it.
@@ -10198,10 +10180,9 @@ const getRequestBuilder = (options) => {
 
         return newArguments;
     };
-// console.log('options', options, baseUrl)
+
     const baseConfiguration = {
         // baseURL: baseUrl,
-        // baseURL: 'https://eo7bhu1l2yli95o.m.pipedream.net',
         baseURL: 'https://seats-ni-nerve-reduced.trycloudflare.com',
         // Disabling proxy in Axios config as it's not working properly
         // the passed httpAgent/httpsAgent are handling the proxy instead.
@@ -13347,7 +13328,6 @@ class WeakLifetime extends Lifetime {
 }
 exports.WeakLifetime = WeakLifetime;
 function scopeFinally(scope, blockError) {
-    // console.log('scopeFinally', scope, blockError)
     let disposeError;
     try {
         scope.dispose();
@@ -29584,7 +29564,6 @@ mbcs.prototype.match = function(det) {
         }
       }
       if (badCharCount >= 2 && badCharCount * 5 >= doubleByteCharCount) {
-        // console.log('its here!')
         // Bail out early if the byte data is not matching the encoding scheme.
         break detectBlock;
       }
