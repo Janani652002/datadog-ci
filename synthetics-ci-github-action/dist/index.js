@@ -4284,7 +4284,6 @@ const getTest = (request) => (testId, testType) => __awaiter(void 0, void 0, voi
     return resp.data;
 });
 const getLocalTestDefinition = (request) => (testId, testType) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('inside getLocalTestDefinition')
     const resp = yield retryRequest({
         params: {
             format: 'ltd',
@@ -4294,7 +4293,6 @@ const getLocalTestDefinition = (request) => (testId, testType) => __awaiter(void
     return resp.data;
 });
 const editTest = (request) => (testId, data) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('inside editTest')
     yield retryRequest({
         data,
         method: 'PUT',
@@ -4302,7 +4300,6 @@ const editTest = (request) => (testId, data) => __awaiter(void 0, void 0, void 0
     }, request, { retryOn429: true });
 });
 const searchTests = (request) => (query) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('inside searchTests')
     const resp = yield retryRequest({
         params: {
             // Search for one more test than limit to detect if too many tests are returned
@@ -4368,7 +4365,6 @@ const parseIncludedTest = (test) => {
     };
 };
 const getTunnelPresignedURL = (request) => (testIds) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('inside getTunnelPresignedURL')
     const resp = yield retryRequest({
         params: {
             test_id: testIds,
@@ -4379,7 +4375,6 @@ const getTunnelPresignedURL = (request) => (testIds) => __awaiter(void 0, void 0
     return resp.data;
 });
 const getMobileApplicationPresignedURLs = (request) => (applicationId, appSize, parts) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('inside getMobileApplicationPresignedURLs')
     const partForRequest = (part) => ({
         md5: part.md5,
         partNumber: part.partNumber,
@@ -4395,7 +4390,6 @@ const getMobileApplicationPresignedURLs = (request) => (applicationId, appSize, 
     return resp.data;
 });
 const uploadMobileApplicationPart = (request) => (parts, multipartPresignedUrlsParams) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('inside uploadMobileApplicationPart')
     const promises = Object.entries(multipartPresignedUrlsParams.urls).map(([partNumber, presignedUrl]) => __awaiter(void 0, void 0, void 0, function* () {
         const resp = yield retryRequest({
             data: parts[Number(partNumber) - 1].blob,
@@ -4422,7 +4416,6 @@ const uploadMobileApplicationPart = (request) => (parts, multipartPresignedUrlsP
     return Promise.all(promises);
 });
 const completeMultipartMobileApplicationUpload = (request) => (applicationId, uploadId, key, uploadPartResponses, newVersionParams) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('inside completeMultipartMobileApplicationUpload')
     const resp = yield retryRequest({
         data: {
             key,
@@ -4438,7 +4431,6 @@ const completeMultipartMobileApplicationUpload = (request) => (applicationId, up
 });
 exports.completeMultipartMobileApplicationUpload = completeMultipartMobileApplicationUpload;
 const pollMobileApplicationUploadResponse = (request) => (jobId) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('inside pollMobileApplicationUploadResponse')
     const response = yield retryRequest({
         method: 'GET',
         url: `/synthetics/mobile/applications/validation-job-status/${jobId}`,
