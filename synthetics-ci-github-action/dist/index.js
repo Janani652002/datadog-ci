@@ -4478,6 +4478,7 @@ exports.is5xxError = is5xxError;
 const retryRequest = (args, request, statusCodesToRetryOn) => (0, public_1.retry)(() => request(args), (retries, e) => (0, exports.determineRetryDelay)(retries, e, statusCodesToRetryOn));
 const apiConstructor = (configuration) => {
     const { baseV1Url, baseV2Url, baseIntakeUrl, baseUnstableUrl, apiKey, appKey, proxyOpts } = configuration;
+    console.log('configurare', configuration)
     const baseOptions = { apiKey, appKey, proxyOpts };
     const requestV1 = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseV1Url }));
     const requestV2 = (0, utils_1.getRequestBuilder)(Object.assign(Object.assign({}, baseOptions), { baseUrl: baseV2Url }));
@@ -10191,7 +10192,7 @@ const getRequestBuilder = (options) => {
         // the passed httpAgent/httpsAgent are handling the proxy instead.
         proxy: false,
     };
-    console.log('baseConfiguration', baseConfiguration)
+    // console.log('baseConfiguration', baseConfiguration)
     return (args) => (0, axios_1.create)(baseConfiguration)(overrideArgs(args));
 };
 exports.getRequestBuilder = getRequestBuilder;
