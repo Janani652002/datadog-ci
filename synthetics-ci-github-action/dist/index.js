@@ -10186,7 +10186,7 @@ const getRequestBuilder = (options) => {
                 newArguments.headers[key] = value;
             });
         }
-        conole.log('new', newArguments)
+        console.log('new', newArguments)
         return newArguments;
     };
 
