@@ -4344,6 +4344,7 @@ const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0
             includedTestsByID.set(r.id, test);
         }
     });
+    console.log('resp', resp)
     const rawPollResults = resp.data.data;
     const parsedPollResults = [];
     for (const r of rawPollResults) {
