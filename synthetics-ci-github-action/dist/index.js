@@ -10168,7 +10168,7 @@ exports.getProxyUrl = getProxyUrl;
 const getRequestBuilder = (options) => {
     const { apiKey, appKey, baseUrl, overrideUrl, proxyOpts } = options;
     const overrideArgs = (args) => {
-        const newArguments = Object.assign(Object.assign({}, args), { headers: Object.assign(Object.assign({ 'DD-API-KEY': apiKey }, (appKey ? { 'DD-API-KEY': appKey } : {})), args.headers) });
+        const newArguments = Object.assign(Object.assign({}, args), { headers: Object.assign(Object.assign({ 'DD-API-KEY': apiKey }, (appKey ? { 'DD-APP-KEY': appKey } : {})), args.headers) });
         if (overrideUrl !== undefined) {
             newArguments.url = overrideUrl;
         }
