@@ -4273,13 +4273,13 @@ const triggerTests = (request) => (data) => __awaiter(void 0, void 0, void 0, fu
         data,
         headers: { 'X-Trigger-App': public_1.ciTriggerApp },
         method: 'POST',
-        url: '/synthetics/tests/trigger/ci',
+        url: '/synthetic/tests/trigger/ci',
     }, request, { retryOn429: true });
     return resp.data;
 });
 const getTest = (request) => (testId, testType) => __awaiter(void 0, void 0, void 0, function* () {
     const resp = yield retryRequest({
-        url: !!testType ? `/synthetics/tests/${testType}/${testId}` : `/synthetics/tests/${testId}`,
+        url: !!testType ? `/synthetics/tests/${testType}/${testId}` : `/synthetic/tests/${testId}`,
     }, request, { retryOn429: true });
     return resp.data;
 });
@@ -4312,12 +4312,12 @@ const searchTests = (request) => (query) => __awaiter(void 0, void 0, void 0, fu
 });
 const getSyntheticsOrgSettings = (request) => () => __awaiter(void 0, void 0, void 0, function* () {
     const resp = yield retryRequest({
-        url: '/synthetics/settings',
+        url: '/synthetic/settings',
     }, request);
     return resp.data;
 });
 const getBatch = (request) => (batchId) => __awaiter(void 0, void 0, void 0, function* () {
-    const resp = yield retryRequest({ url: `/synthetics/ci/batch/${batchId}` }, request, {
+    const resp = yield retryRequest({ url: `/synthetic/ci/batch/${batchId}` }, request, {
         retryOn404: true,
         retryOn429: true,
     });
@@ -4328,14 +4328,14 @@ const getBatch = (request) => (batchId) => __awaiter(void 0, void 0, void 0, fun
     };
 });
 const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('req', request.toString())
     var _a;
+    console.log('request', request.toString())
     const resp = yield retryRequest({
         params: {
             result_ids: JSON.stringify(resultIds),
         },
         // url: '/synthetics/tests/poll_results',
-        url: '/synthetics/tests/poll_results',
+        url: '/continuous_testing/synthetic/tests/poll_results',
     }, request, { retryOn404: true, retryOn429: true });
     const includedTestsByID = new Map();
     (_a = resp.data.included) === null || _a === void 0 ? void 0 : _a.forEach((r) => {
@@ -4957,6 +4957,7 @@ const getPollResultMap = (api, resultIds, backupPollResultMap) => __awaiter(void
         return { pollResultMap, incompleteResultIds };
     }
     catch (e) {
+        console.log('e', e)
         if ((0, api_1.getErrorHttpStatus)(e) === 404) {
             // If some results have latency and retries were not enough, the whole request fails with "Test results not found".
             // In that case, we mark results IDs that were never polled before as incomplete so they are fetched in the next polling cycles.
@@ -6895,7 +6896,6 @@ const getTest = (api, triggerConfig) => __awaiter(void 0, void 0, void 0, functi
         return { test };
     }
     catch (error) {
-        console.log('error', error)
         if ((0, api_1.isNotFoundError)(error)) {
             const errorMessage = (0, api_1.formatBackendErrors)(error);
             return { errorMessage: `[${chalk_1.default.bold.dim(publicId)}] ${chalk_1.default.yellow.bold('Test not found')}: ${errorMessage}` };
@@ -8182,9 +8182,9 @@ const getDatadogHost = (hostConfig) => {
     const apiPath = (() => {
         switch (apiVersion) {
             case 'v1':
-                return 'api/v1';
+                return 'v2';
             case 'v2':
-                return 'api/v2';
+                return 'v2';
             case 'unstable':
                 return 'api/unstable';
             default:
@@ -10169,7 +10169,7 @@ exports.getProxyUrl = getProxyUrl;
 const getRequestBuilder = (options) => {
     const { apiKey, appKey, baseUrl, overrideUrl, proxyOpts } = options;
     const overrideArgs = (args) => {
-        const newArguments = Object.assign(Object.assign({}, args), { headers: Object.assign(Object.assign({ 'DD-API-KEY': apiKey }, (appKey ? { 'DD-APP-KEY': appKey } : {})), args.headers) });
+        const newArguments = Object.assign(Object.assign({}, args), { headers: Object.assign(Object.assign({ 'X-API-KEY': apiKey }, (appKey ? { 'DD-API-KEY': appKey } : {})), args.headers) });
         if (overrideUrl !== undefined) {
             newArguments.url = overrideUrl;
         }
