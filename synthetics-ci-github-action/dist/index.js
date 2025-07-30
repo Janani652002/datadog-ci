@@ -4329,7 +4329,7 @@ const getBatch = (request) => (batchId) => __awaiter(void 0, void 0, void 0, fun
 });
 const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    console.log('request', request.toString())
+    // console.log('request', request.toString())
     const resp = yield retryRequest({
         params: {
             result_ids: JSON.stringify(resultIds),
@@ -10169,7 +10169,6 @@ const getProxyUrl = (options) => {
 exports.getProxyUrl = getProxyUrl;
 const getRequestBuilder = (options) => {
     const { apiKey, appKey, baseUrl, overrideUrl, proxyOpts } = options;
-    console.log('over', overrideUrl)
     const overrideArgs = (args) => {
         const newArguments = Object.assign(Object.assign({}, args), { headers: Object.assign(Object.assign({ 'DD-API-KEY': apiKey }, (appKey ? { 'DD-APPLICATION-KEY': appKey } : {})), args.headers) });
         if (overrideUrl !== undefined) {
@@ -10185,7 +10184,6 @@ const getRequestBuilder = (options) => {
                 newArguments.headers[key] = value;
             });
         }
-        console.log('new', newArguments)
         return newArguments;
     };
 
@@ -10195,7 +10193,6 @@ const getRequestBuilder = (options) => {
         // the passed httpAgent/httpsAgent are handling the proxy instead.
         proxy: false,
     };
-    console.log('base', baseConfiguration)
     return (args) => (0, axios_1.create)(baseConfiguration)(overrideArgs(args));
 };
 exports.getRequestBuilder = getRequestBuilder;
