@@ -6895,6 +6895,7 @@ const getTest = (api, triggerConfig) => __awaiter(void 0, void 0, void 0, functi
         return { test };
     }
     catch (error) {
+        console.log('error', error)
         if ((0, api_1.isNotFoundError)(error)) {
             const errorMessage = (0, api_1.formatBackendErrors)(error);
             return { errorMessage: `[${chalk_1.default.bold.dim(publicId)}] ${chalk_1.default.yellow.bold('Test not found')}: ${errorMessage}` };
@@ -6903,7 +6904,6 @@ const getTest = (api, triggerConfig) => __awaiter(void 0, void 0, void 0, functi
             const errorMessage = (0, api_1.formatBackendErrors)(error);
             return { errorMessage: `[${chalk_1.default.bold.dim(publicId)}] ${chalk_1.default.red.bold('Test not authorized')}: ${errorMessage}` };
         }
-        console.log('error', error)
         throw new api_1.EndpointError(`Failed to get test: ${(0, api_1.
             )(error)}\n`, (_d = error.response) === null || _d === void 0 ? void 0 : _d.status);
     }
