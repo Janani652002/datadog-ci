@@ -4281,6 +4281,7 @@ const getTest = (request) => (testId, testType) => __awaiter(void 0, void 0, voi
     const resp = yield retryRequest({
         url: !!testType ? `/synthetics/tests/${testType}/${testId}` : `/synthetics/tests/${testId}`,
     }, request, { retryOn429: true });
+    console.log('respp', JSON.stringify(resp.data))
     return resp.data;
 });
 const getLocalTestDefinition = (request) => (testId, testType) => __awaiter(void 0, void 0, void 0, function* () {
@@ -4321,6 +4322,7 @@ const getBatch = (request) => (batchId) => __awaiter(void 0, void 0, void 0, fun
         retryOn404: true,
         retryOn429: true,
     });
+    console.log('resp', JSON.stringify(resp.data.data))
     const serverBatch = resp.data.data;
     return {
         results: serverBatch.results.filter((r) => r.status !== 'skipped' || r.selective_rerun),
