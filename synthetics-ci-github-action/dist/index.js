@@ -8182,7 +8182,7 @@ const getDatadogHost = (hostConfig) => {
             case 'v1':
                 return 'v2';
             case 'v2':
-                return '/api/v2';
+                return 'api/v2';
             case 'unstable':
                 return 'api/unstable';
             default:
