@@ -4943,6 +4943,7 @@ const getPollResultMap = (api, resultIds, backupPollResultMap) => __awaiter(void
     const incompleteResultIds = new Set();
     try {
         const pollResults = yield api.pollResults(resultIds);
+        console.log('poll', pollResults)
         pollResults.forEach((r) => {
             // Server results can take some time to arrive. During this time,
             // the endpoint returns a partial result with only `test_type` and `result.id` set.
