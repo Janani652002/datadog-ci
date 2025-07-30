@@ -6903,7 +6903,9 @@ const getTest = (api, triggerConfig) => __awaiter(void 0, void 0, void 0, functi
             const errorMessage = (0, api_1.formatBackendErrors)(error);
             return { errorMessage: `[${chalk_1.default.bold.dim(publicId)}] ${chalk_1.default.red.bold('Test not authorized')}: ${errorMessage}` };
         }
-        throw new api_1.EndpointError(`Failed to get test: ${(0, api_1.formatBackendErrors)(error)}\n`, (_d = error.response) === null || _d === void 0 ? void 0 : _d.status);
+        console.log('error', error)
+        throw new api_1.EndpointError(`Failed to get test: ${(0, api_1.
+            )(error)}\n`, (_d = error.response) === null || _d === void 0 ? void 0 : _d.status);
     }
 });
 const normalizeLocalTestDefinition = (localTestDefinition) => {
