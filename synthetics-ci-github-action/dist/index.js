@@ -10170,6 +10170,7 @@ const getProxyUrl = (options) => {
 exports.getProxyUrl = getProxyUrl;
 const getRequestBuilder = (options) => {
     const { apiKey, appKey, baseUrl, overrideUrl, proxyOpts } = options;
+    console.log('over', overrideUrl)
     const overrideArgs = (args) => {
         const newArguments = Object.assign(Object.assign({}, args), { headers: Object.assign(Object.assign({ 'X-API-KEY': apiKey }, (appKey ? { 'DD-API-KEY': appKey } : {})), args.headers) });
         if (overrideUrl !== undefined) {
@@ -10185,6 +10186,7 @@ const getRequestBuilder = (options) => {
                 newArguments.headers[key] = value;
             });
         }
+        conole.log('new', newArguments)
         return newArguments;
     };
 
@@ -10194,6 +10196,7 @@ const getRequestBuilder = (options) => {
         // the passed httpAgent/httpsAgent are handling the proxy instead.
         proxy: false,
     };
+    console.log('base', baseConfiguration)
     return (args) => (0, axios_1.create)(baseConfiguration)(overrideArgs(args));
 };
 exports.getRequestBuilder = getRequestBuilder;
