@@ -4164,7 +4164,7 @@ const getTestRunsUrlPath = (spanTags, queryPrefix = '') => {
     else if (spanTags[tags_1.CI_PIPELINE_URL]) {
         query += ` @ci.pipeline.url:"${spanTags[tags_1.CI_PIPELINE_URL]}"`;
     }
-    return `ci/synthetic/test-runs?query=${encodeURIComponent(query)}`;
+    return `ci/test-runs?query=${encodeURIComponent(query)}`;
 };
 exports.getTestRunsUrlPath = getTestRunsUrlPath;
 const getTestRunsUrl = (spanTags, queryPrefix = '') => {
@@ -4273,13 +4273,13 @@ const triggerTests = (request) => (data) => __awaiter(void 0, void 0, void 0, fu
         data,
         headers: { 'X-Trigger-App': public_1.ciTriggerApp },
         method: 'POST',
-        url: '/synthetic/tests/trigger/ci',
+        url: '/synthetics/tests/trigger/ci',
     }, request, { retryOn429: true });
     return resp.data;
 });
 const getTest = (request) => (testId, testType) => __awaiter(void 0, void 0, void 0, function* () {
     const resp = yield retryRequest({
-        url: !!testType ? `/synthetics/tests/${testType}/${testId}` : `/synthetic/tests/${testId}`,
+        url: !!testType ? `/synthetics/tests/${testType}/${testId}` : `/synthetics/tests/${testId}`,
     }, request, { retryOn429: true });
     return resp.data;
 });
@@ -4312,12 +4312,12 @@ const searchTests = (request) => (query) => __awaiter(void 0, void 0, void 0, fu
 });
 const getSyntheticsOrgSettings = (request) => () => __awaiter(void 0, void 0, void 0, function* () {
     const resp = yield retryRequest({
-        url: '/synthetic/settings',
+        url: '/synthetics/settings',
     }, request);
     return resp.data;
 });
 const getBatch = (request) => (batchId) => __awaiter(void 0, void 0, void 0, function* () {
-    const resp = yield retryRequest({ url: `/synthetic/ci/batch/${batchId}` }, request, {
+    const resp = yield retryRequest({ url: `/synthetics/ci/batch/${batchId}` }, request, {
         retryOn404: true,
         retryOn429: true,
     });
@@ -4334,7 +4334,7 @@ const pollResults = (request) => (resultIds) => __awaiter(void 0, void 0, void 0
             result_ids: JSON.stringify(resultIds),
         },
         // url: '/synthetics/tests/poll_results',
-        url: '/synthetic/tests/poll_results',
+        url: '/continuous_testing/synthetics/tests/poll_results',
     }, request, { retryOn404: true, retryOn429: true });
     const includedTestsByID = new Map();
     (_a = resp.data.included) === null || _a === void 0 ? void 0 : _a.forEach((r) => {
@@ -5900,7 +5900,7 @@ class DefaultReporter {
             lines.push(`\nView test runs in Test Optimization: ${chalk_1.default.dim.cyan(baseUrl + testRunsUrlPath)}`);
         }
         if (orgSettings && orgSettings.onDemandConcurrencyCap > 0) {
-            lines.push(`\nIncrease your parallelization to reduce the CI batch duration: ${chalk_1.default.dim.cyan(baseUrl + 'synthetic/settings/continuous-testing')}`);
+            lines.push(`\nIncrease your parallelization to reduce the CI batch duration: ${chalk_1.default.dim.cyan(baseUrl + 'synthetics/settings/continuous-testing')}`);
         }
         this.write(lines.join('\n') + '\n');
     }
@@ -8067,11 +8067,11 @@ const getAppBaseURL = ({ datadogSite, subdomain }) => {
     return (0, app_1.getCommonAppBaseURL)(datadogSite, subdomain);
 };
 exports.getAppBaseURL = getAppBaseURL;
-const getBatchUrl = (baseUrl, batchId) => `${baseUrl}synthetic/explorer/ci?batchResultId=${batchId}`;
+const getBatchUrl = (baseUrl, batchId) => `${baseUrl}synthetics/explorer/ci?batchResultId=${batchId}`;
 exports.getBatchUrl = getBatchUrl;
 const getResultUrl = (baseUrl, test, resultId, batchId) => {
     const ciQueryParam = `batch_id=${batchId}&from_ci=true`;
-    const testDetailUrl = `${baseUrl}synthetic/details/${test.public_id}`;
+    const testDetailUrl = `${baseUrl}synthetics/details/${test.public_id}`;
     if (test.type === 'browser') {
         return `${testDetailUrl}/result/${resultId}?${ciQueryParam}`;
     }
@@ -8180,9 +8180,9 @@ const getDatadogHost = (hostConfig) => {
     const apiPath = (() => {
         switch (apiVersion) {
             case 'v1':
-                return 'v2';
+                return 'api/v1';
             case 'v2':
-                return 'v2/ci';
+                return 'api/v2';
             case 'unstable':
                 return 'api/unstable';
             default:
@@ -8197,9 +8197,7 @@ const getDatadogHost = (hostConfig) => {
     else if (useIntake && (config.datadogSite === 'datadoghq.com' || config.datadogSite === 'datad0g.com')) {
         host = `https://intake.synthetics.${config.datadogSite}`;
     }
-    console.log('host', `${host}/${apiPath}`)
     return `${host}/${apiPath}`;
-    // return `${host}`;
 };
 exports.getDatadogHost = getDatadogHost;
 const pluralize = (word, count) => (count === 1 ? word : `${word}s`);
@@ -10167,7 +10165,7 @@ exports.getProxyUrl = getProxyUrl;
 const getRequestBuilder = (options) => {
     const { apiKey, appKey, baseUrl, overrideUrl, proxyOpts } = options;
     const overrideArgs = (args) => {
-        const newArguments = Object.assign(Object.assign({}, args), { headers: Object.assign(Object.assign({ 'X-API-KEY': apiKey }, (appKey ? { 'DD-API-KEY': appKey } : {})), args.headers) });
+        const newArguments = Object.assign(Object.assign({}, args), { headers: Object.assign(Object.assign({ 'DD-API-KEY': apiKey }, (appKey ? { 'DD-APPLICATION-KEY': appKey } : {})), args.headers) });
         if (overrideUrl !== undefined) {
             newArguments.url = overrideUrl;
         }
