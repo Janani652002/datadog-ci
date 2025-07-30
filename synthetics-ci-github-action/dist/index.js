@@ -4164,7 +4164,7 @@ const getTestRunsUrlPath = (spanTags, queryPrefix = '') => {
     else if (spanTags[tags_1.CI_PIPELINE_URL]) {
         query += ` @ci.pipeline.url:"${spanTags[tags_1.CI_PIPELINE_URL]}"`;
     }
-    return `ci/test-runs?query=${encodeURIComponent(query)}`;
+    return `ci/synthetic/test-runs?query=${encodeURIComponent(query)}`;
 };
 exports.getTestRunsUrlPath = getTestRunsUrlPath;
 const getTestRunsUrl = (spanTags, queryPrefix = '') => {
@@ -8182,7 +8182,7 @@ const getDatadogHost = (hostConfig) => {
             case 'v1':
                 return 'v2';
             case 'v2':
-                return 'api/v2';
+                return 'v2/ci';
             case 'unstable':
                 return 'api/unstable';
             default:
