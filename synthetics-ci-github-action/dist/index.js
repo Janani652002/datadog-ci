@@ -8070,7 +8070,6 @@ exports.getAppBaseURL = getAppBaseURL;
 const getBatchUrl = (baseUrl, batchId) => `${baseUrl}v2/synthetic/explorer/ci?batchResultId=${batchId}`;
 exports.getBatchUrl = getBatchUrl;
 const getResultUrl = (baseUrl, test, resultId, batchId) => {
-    console.log('getResultUrlbaseUrl', baseUrl)
     const ciQueryParam = `batch_id=${batchId}&from_ci=true`;
     const testDetailUrl = `${baseUrl}v2/synthetic/details/${test.public_id}`;
     if (test.type === 'browser') {
