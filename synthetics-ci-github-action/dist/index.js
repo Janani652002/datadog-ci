@@ -8067,7 +8067,7 @@ const retry = (func, shouldRetryAfterWait) => __awaiter(void 0, void 0, void 0, 
 });
 exports.retry = retry;
 const getAppBaseURL = ({ datadogSite, subdomain }) => {
-    console.log('i think so')
+    console.log('i think so', datadogSite, subdomain)
     return (0, app_1.getCommonAppBaseURL)(datadogSite, subdomain);
 };
 exports.getAppBaseURL = getAppBaseURL;
@@ -8484,6 +8484,7 @@ exports.getBaseUrl = getBaseUrl;
 const getCommonAppBaseURL = (datadogSite, subdomain) => {
     const validSubdomain = subdomain || exports.DEFAULT_DATADOG_SUBDOMAIN;
     const datadogSiteParts = datadogSite.split('.');
+    console.log('datadogSiteParts', datadogSiteParts.length)
     if (datadogSiteParts.length === 3) {
         if (validSubdomain === exports.DEFAULT_DATADOG_SUBDOMAIN) {
             return `https://${datadogSite}/`;
