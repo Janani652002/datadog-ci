@@ -5842,6 +5842,7 @@ class DefaultReporter {
         return;
     }
     runEnd(summary, baseUrl, orgSettings) {
+        console.log('base:-----------', baseUrl)
         var _a, _b, _c, _d;
         const { bold: b, gray, green, red, yellow } = chalk_1.default;
         const lines = [];
@@ -5899,6 +5900,7 @@ class DefaultReporter {
         if (testRunsUrlPath) {
             lines.push(`\nView test runs in Test Optimization: ${chalk_1.default.dim.cyan(baseUrl + testRunsUrlPath)}`);
         }
+        console.log('baseUrlll', baseUrl)
         if (orgSettings && orgSettings.onDemandConcurrencyCap > 0) {
             lines.push(`\nIncrease your parallelization to reduce the CI batch duration: ${chalk_1.default.dim.cyan(baseUrl + 'synthetic/settings/continuous-testing')}`);
         }
