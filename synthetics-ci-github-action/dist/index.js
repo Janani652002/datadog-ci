@@ -57,6 +57,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
 
         datadog_ci_1.synthetics.utils.reportExitLogs(reporter, config, { results });
         const baseUrl = datadog_ci_1.synthetics.utils.getAppBaseURL(config);
+        console.log('base', baseUrl)
         const batchUrl = datadog_ci_1.synthetics.utils.getBatchUrl(baseUrl, summary.batchId);
         setOutputs(results, summary, batchUrl);
         const exitReason = datadog_ci_1.synthetics.utils.getExitReason(config, { results });
@@ -8066,12 +8067,14 @@ const retry = (func, shouldRetryAfterWait) => __awaiter(void 0, void 0, void 0, 
 });
 exports.retry = retry;
 const getAppBaseURL = ({ datadogSite, subdomain }) => {
+    console.log('i think so')
     return (0, app_1.getCommonAppBaseURL)(datadogSite, subdomain);
 };
 exports.getAppBaseURL = getAppBaseURL;
 const getBatchUrl = (baseUrl, batchId) => `${baseUrl}synthetic/explorer/ci?batchResultId=${batchId}`;
 exports.getBatchUrl = getBatchUrl;
 const getResultUrl = (baseUrl, test, resultId, batchId) => {
+    console.log('getResultUrlbaseUrl', baseUrl)
     const ciQueryParam = `batch_id=${batchId}&from_ci=true`;
     const testDetailUrl = `${baseUrl}synthetic/details/${test.public_id}`;
     if (test.type === 'browser') {
@@ -8134,6 +8137,7 @@ const renderResults = ({ config, orgSettings, reporter, results, startTime, summ
             summary.failed++;
         }
     }
+    console.log('its work')
     reporter.runEnd(summary, (0, exports.getAppBaseURL)(config), orgSettings);
 };
 exports.renderResults = renderResults;
