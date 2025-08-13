@@ -4165,7 +4165,7 @@ const getTestRunsUrlPath = (spanTags, queryPrefix = '') => {
     else if (spanTags[tags_1.CI_PIPELINE_URL]) {
         query += ` @ci.pipeline.url:"${spanTags[tags_1.CI_PIPELINE_URL]}"`;
     }
-    return `ci/synthetic/test-runs?query=${encodeURIComponent(query)}`;
+    return `v2/ci/synthetic/test-runs?query=${encodeURIComponent(query)}`;
 };
 exports.getTestRunsUrlPath = getTestRunsUrlPath;
 const getTestRunsUrl = (spanTags, queryPrefix = '') => {
@@ -5903,7 +5903,7 @@ class DefaultReporter {
         }
         console.log('baseUrlll', baseUrl)
         if (orgSettings && orgSettings.onDemandConcurrencyCap > 0) {
-            lines.push(`\nIncrease your parallelization to reduce the CI batch duration: ${chalk_1.default.dim.cyan(baseUrl + 'synthetic/settings/continuous-testing')}`);
+            lines.push(`\nIncrease your parallelization to reduce the CI batch duration: ${chalk_1.default.dim.cyan(baseUrl + 'v2/synthetic/settings/continuous-testing')}`);
         }
         this.write(lines.join('\n') + '\n');
     }
@@ -8071,12 +8071,12 @@ const getAppBaseURL = ({ datadogSite, subdomain }) => {
     return (0, app_1.getCommonAppBaseURL)(datadogSite, subdomain);
 };
 exports.getAppBaseURL = getAppBaseURL;
-const getBatchUrl = (baseUrl, batchId) => `${baseUrl}synthetic/explorer/ci?batchResultId=${batchId}`;
+const getBatchUrl = (baseUrl, batchId) => `${baseUrl}v2/synthetic/explorer/ci?batchResultId=${batchId}`;
 exports.getBatchUrl = getBatchUrl;
 const getResultUrl = (baseUrl, test, resultId, batchId) => {
     console.log('getResultUrlbaseUrl', baseUrl)
     const ciQueryParam = `batch_id=${batchId}&from_ci=true`;
-    const testDetailUrl = `${baseUrl}synthetic/details/${test.public_id}`;
+    const testDetailUrl = `${baseUrl}v2/synthetic/details/${test.public_id}`;
     if (test.type === 'browser') {
         return `${testDetailUrl}/result/${resultId}?${ciQueryParam}`;
     }
