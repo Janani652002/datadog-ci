@@ -57,7 +57,6 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
 
         datadog_ci_1.synthetics.utils.reportExitLogs(reporter, config, { results });
         const baseUrl = datadog_ci_1.synthetics.utils.getAppBaseURL(config);
-        console.log('base', baseUrl)
         const batchUrl = datadog_ci_1.synthetics.utils.getBatchUrl(baseUrl, summary.batchId);
         setOutputs(results, summary, batchUrl);
         const exitReason = datadog_ci_1.synthetics.utils.getExitReason(config, { results });
@@ -5843,7 +5842,6 @@ class DefaultReporter {
         return;
     }
     runEnd(summary, baseUrl, orgSettings) {
-        console.log('base:-----------', baseUrl)
         var _a, _b, _c, _d;
         const { bold: b, gray, green, red, yellow } = chalk_1.default;
         const lines = [];
@@ -5901,7 +5899,6 @@ class DefaultReporter {
         if (testRunsUrlPath) {
             lines.push(`\nView test runs in Test Optimization: ${chalk_1.default.dim.cyan(baseUrl + testRunsUrlPath)}`);
         }
-        console.log('baseUrlll', baseUrl)
         if (orgSettings && orgSettings.onDemandConcurrencyCap > 0) {
             lines.push(`\nIncrease your parallelization to reduce the CI batch duration: ${chalk_1.default.dim.cyan(baseUrl + 'v2/synthetic/settings/continuous-testing')}`);
         }
@@ -8067,7 +8064,6 @@ const retry = (func, shouldRetryAfterWait) => __awaiter(void 0, void 0, void 0, 
 });
 exports.retry = retry;
 const getAppBaseURL = ({ datadogSite, subdomain }) => {
-    console.log('i think so', datadogSite, subdomain)
     return (0, app_1.getCommonAppBaseURL)(datadogSite, subdomain);
 };
 exports.getAppBaseURL = getAppBaseURL;
@@ -8137,7 +8133,6 @@ const renderResults = ({ config, orgSettings, reporter, results, startTime, summ
             summary.failed++;
         }
     }
-    console.log('its work')
     reporter.runEnd(summary, (0, exports.getAppBaseURL)(config), orgSettings);
 };
 exports.renderResults = renderResults;
@@ -8203,7 +8198,6 @@ const getDatadogHost = (hostConfig) => {
     else if (useIntake && (config.datadogSite === 'datadoghq.com' || config.datadogSite === 'datad0g.com')) {
         host = `https://intake.synthetics.${config.datadogSite}`;
     }
-console.log('printttttt', `${host}/${apiPath}`)
     return `${host}/${apiPath}`;
 };
 exports.getDatadogHost = getDatadogHost;
@@ -8484,7 +8478,6 @@ exports.getBaseUrl = getBaseUrl;
 const getCommonAppBaseURL = (datadogSite, subdomain) => {
     const validSubdomain = subdomain || exports.DEFAULT_DATADOG_SUBDOMAIN;
     const datadogSiteParts = datadogSite.split('.');
-    console.log('datadogSiteParts', datadogSiteParts.length)
     if (datadogSiteParts.length === 3) {
         if (validSubdomain === exports.DEFAULT_DATADOG_SUBDOMAIN) {
             return `https://${datadogSite}/`;
