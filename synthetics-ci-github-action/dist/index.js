@@ -8197,7 +8197,7 @@ const getDatadogHost = (hostConfig) => {
     else if (useIntake && (config.datadogSite === 'datadoghq.com' || config.datadogSite === 'datad0g.com')) {
         host = `https://intake.synthetics.${config.datadogSite}`;
     }
-
+console.log('printttttt', `${host}/${apiPath}`)
     return `${host}/${apiPath}`;
 };
 exports.getDatadogHost = getDatadogHost;
